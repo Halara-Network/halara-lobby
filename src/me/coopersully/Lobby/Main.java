@@ -107,11 +107,11 @@ public class Main extends JavaPlugin implements Listener {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
         switch (label) {
-            case "server-selector", "servers", "play" -> {
+            case "server-selector", "servers", "play", "games", "go" -> {
                 HalaraCommand.openServerGUI(sender, cmd, label, args);
                 return true;
             }
-            case "fixspeeds" -> {
+            case "fixspeeds", "resetspeeds" -> {
                 HalaraCommand.fixPlayerSpeeds(sender, cmd, label, args);
                 return true;
             }
