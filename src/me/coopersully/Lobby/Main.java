@@ -22,18 +22,21 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.ArrayList;
 import java.util.List;
 
+import static me.coopersully.Lobby.Command.fixPlayerSpeeds;
+import static me.coopersully.Lobby.Command.openServerGUI;
+
 public class Main extends JavaPlugin implements Listener {
 
-    public Inventory server_selector;
+    public static Inventory server_selector;
 
-    public ItemStack survival_item = new ItemStack(Material.OAK_LOG);
-    public ItemMeta survival_meta = survival_item.getItemMeta();
+    public static ItemStack survival_item = new ItemStack(Material.OAK_LOG);
+    public static ItemMeta survival_meta = survival_item.getItemMeta();
 
-    public ItemStack creative_item = new ItemStack(Material.DIAMOND_BLOCK);
-    public ItemMeta creative_meta = creative_item.getItemMeta();
+    public static ItemStack creative_item = new ItemStack(Material.DIAMOND_BLOCK);
+    public static ItemMeta creative_meta = creative_item.getItemMeta();
 
-    public ItemStack prototype_item = new ItemStack(Material.AMETHYST_BLOCK);
-    public ItemMeta prototype_meta = prototype_item.getItemMeta();
+    public static ItemStack prototype_item = new ItemStack(Material.AMETHYST_BLOCK);
+    public static ItemMeta prototype_meta = prototype_item.getItemMeta();
 
     // Triggers on server startup, restart, and reload
     @Override
@@ -106,62 +109,18 @@ public class Main extends JavaPlugin implements Listener {
     // All existing commands
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
-        // Command to open server selector
-        if (label.equalsIgnoreCase("server-selector") || label.equalsIgnoreCase("play") || label.equalsIgnoreCase("games") || label.equalsIgnoreCase("servers")) {
-
-            // If the command's sender is a player
-            if (sender instanceof Player) {
-
-                Player player = (Player) sender;
-                PlayerInventory inv = player.getInventory();
-
-                // Clear inventory
-                inv.clear();
-
-                // Give server icon items
-                inv.setItem(11, survival_item);
-                inv.setItem(13, creative_item);
-                inv.setItem(15, prototype_item);
-
-                // Open the "Server Selector" GUI
-                player.openInventory(server_selector);
-
+        switch (label) {
+            case "server-selector", "servers", "play" -> {
+                openServerGUI(sender, cmd, label, args);
+                return true;
             }
-            // If the command's sender is !player
-            else {
-
-                sender.sendMessage(ChatColor.RED + "This command cannot be performed by the console.");
-
+            case "fixspeeds" -> {
+                fixPlayerSpeeds(sender, cmd, label, args);
+                return true;
             }
-            return true;
-
-        }
-
-        if (label.equalsIgnoreCase("fixspeeds")) {
-
-            // If the command's sender is a player
-            if (sender instanceof Player) {
-
-                Player player = (Player) sender;
-
-                player.setFlySpeed(0.1F);
-                player.setWalkSpeed(0.2F);
-
-                sender.sendMessage(ChatColor.GREEN + "All player speeds reset to their default values.");
-
-            }
-            // If the command's sender is !player
-            else {
-
-                sender.sendMessage(ChatColor.RED + "This command cannot be performed by the console.");
-
-            }
-            return true;
-
         }
 
         return false;
-
     }
 
     @EventHandler
@@ -194,6 +153,9 @@ public class Main extends JavaPlugin implements Listener {
     @EventHandler
     public void onClick(InventoryClickEvent event) {
 
+        if (event.getCurrentItem() == null) {
+            return;
+        }
         if (!((event.getCurrentItem().isSimilar(survival_item)) || (event.getCurrentItem().isSimilar(creative_item)) || (event.getCurrentItem().isSimilar(prototype_item)))) {
             return;
         }
@@ -234,11 +196,8 @@ public class Main extends JavaPlugin implements Listener {
         Player player = (Player) event.getPlayer();
 
         if (!(event.getInventory() == server_selector)) {
-            player.sendMessage("A non-GUI menu was closed.");
             return;
         }
-
-        player.sendMessage("A GUI menu was closed & cleared.");
 
         PlayerInventory inv = player.getInventory();
         inv.removeItem(survival_item, creative_item, prototype_item);
