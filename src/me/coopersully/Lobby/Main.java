@@ -22,9 +22,6 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.ArrayList;
 import java.util.List;
 
-import static me.coopersully.Lobby.Command.fixPlayerSpeeds;
-import static me.coopersully.Lobby.Command.openServerGUI;
-
 public class Main extends JavaPlugin implements Listener {
 
     public static Inventory server_selector;
@@ -111,11 +108,11 @@ public class Main extends JavaPlugin implements Listener {
 
         switch (label) {
             case "server-selector", "servers", "play" -> {
-                openServerGUI(sender, cmd, label, args);
+                HalaraCommand.openServerGUI(sender, cmd, label, args);
                 return true;
             }
             case "fixspeeds" -> {
-                fixPlayerSpeeds(sender, cmd, label, args);
+                HalaraCommand.fixPlayerSpeeds(sender, cmd, label, args);
                 return true;
             }
         }

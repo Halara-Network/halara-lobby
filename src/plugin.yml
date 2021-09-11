@@ -1,6 +1,6 @@
 main: me.coopersully.Lobby.Main
 name: Halara-Lobby
-version: 1.7.1
+version: 1.7.2
 author: Curse
 description: Implements mechanics for server-switching and more.
 api-version: 1.17

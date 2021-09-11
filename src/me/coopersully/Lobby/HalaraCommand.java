@@ -1,13 +1,14 @@
 package me.coopersully.Lobby;
 
 import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.PlayerInventory;
 
-public class Command {
+public class HalaraCommand {
 
-    public static void openServerGUI(CommandSender sender, org.bukkit.command.Command cmd, String label, String[] args) {
+    public static void openServerGUI(CommandSender sender, Command cmd, String label, String[] args) {
         // If the command's sender is a player
         if (sender instanceof Player) {
 
@@ -34,7 +35,7 @@ public class Command {
         }
     }
 
-    public static void fixPlayerSpeeds(CommandSender sender, org.bukkit.command.Command cmd, String label, String[] args) {
+    public static void fixPlayerSpeeds(CommandSender sender, Command cmd, String label, String[] args) {
         // If the command's sender is a player
         if (sender instanceof Player) {
 
