@@ -108,11 +108,11 @@ public class Main extends JavaPlugin implements Listener {
 
         switch (label) {
             case "server-selector", "servers", "play", "games", "go" -> {
-                HalaraCommand.openServerGUI(sender, cmd, label, args);
+                HalaraCommand.openServerGUI(sender);
                 return true;
             }
             case "fixspeeds", "resetspeeds" -> {
-                HalaraCommand.fixPlayerSpeeds(sender, cmd, label, args);
+                HalaraCommand.fixPlayerSpeeds(sender);
                 return true;
             }
         }

@@ -8,7 +8,7 @@ import org.bukkit.inventory.PlayerInventory;
 
 public class HalaraCommand {
 
-    public static void openServerGUI(CommandSender sender, Command cmd, String label, String[] args) {
+    public static void openServerGUI(CommandSender sender) {
         // If the command's sender is a player
         if (sender instanceof Player) {
 
@@ -35,7 +35,7 @@ public class HalaraCommand {
         }
     }
 
-    public static void fixPlayerSpeeds(CommandSender sender, Command cmd, String label, String[] args) {
+    public static void fixPlayerSpeeds(CommandSender sender) {
         // If the command's sender is a player
         if (sender instanceof Player) {
 
