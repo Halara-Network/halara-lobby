@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="Halara-Lobby:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Halara_Lobby_jar</output-path>
+    <root id="archive" name="Halara-Lobby.jar">
+      <element id="module-output" name="Halara-Lobby" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../SpigotPlugin/spigot-1.17.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
