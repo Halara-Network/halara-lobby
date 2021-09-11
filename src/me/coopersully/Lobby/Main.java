@@ -5,6 +5,7 @@ import com.google.common.io.ByteStreams;
 import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -15,13 +16,11 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class Main extends JavaPlugin implements Listener {
 
@@ -67,7 +66,7 @@ public class Main extends JavaPlugin implements Listener {
 
         survival_meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&e&lEnhanced Survival &a[1.17+]"));
 
-        List<String> survival_lore = new ArrayList<String>();
+        List<String> survival_lore = new ArrayList<>();
         survival_lore.add(ChatColor.GRAY + "" + ChatColor.ITALIC + "An enhanced version of the survival");
         survival_lore.add(ChatColor.GRAY + "" + ChatColor.ITALIC + "experience; collect, combat, and build.");
         survival_lore.add("");
@@ -80,7 +79,7 @@ public class Main extends JavaPlugin implements Listener {
 
         creative_meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&e&lCreative &a[1.17+]"));
 
-        List<String> creative_lore = new ArrayList<String>();
+        List<String> creative_lore = new ArrayList<>();
         creative_lore.add(ChatColor.GRAY + "" + ChatColor.ITALIC + "A freestyle, sandbox gamemode in which");
         creative_lore.add(ChatColor.GRAY + "" + ChatColor.ITALIC + "players build to their heart's content.");
         creative_lore.add("");
@@ -93,7 +92,7 @@ public class Main extends JavaPlugin implements Listener {
 
         prototype_meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&e&lPrototype &a[1.17+]"));
 
-        List<String> prototype_lore = new ArrayList<String>();
+        List<String> prototype_lore = new ArrayList<>();
         prototype_lore.add(ChatColor.GRAY + "" + ChatColor.ITALIC + "This gamemode is currently undergoing");
         prototype_lore.add(ChatColor.GRAY + "" + ChatColor.ITALIC + "maintenance; please check back later.");
         prototype_lore.add("");
@@ -127,16 +126,14 @@ public class Main extends JavaPlugin implements Listener {
                 // Open the "Server Selector" GUI
                 player.openInventory(server_selector);
 
-                return true;
-
             }
             // If the command's sender is !player
             else {
 
                 sender.sendMessage(ChatColor.RED + "This command cannot be performed by the console.");
-                return true;
 
             }
+            return true;
 
         }
 
@@ -152,16 +149,14 @@ public class Main extends JavaPlugin implements Listener {
 
                 sender.sendMessage(ChatColor.GREEN + "All player speeds reset to their default values.");
 
-                return true;
-
             }
             // If the command's sender is !player
             else {
 
                 sender.sendMessage(ChatColor.RED + "This command cannot be performed by the console.");
-                return true;
 
             }
+            return true;
 
         }
 
@@ -172,7 +167,7 @@ public class Main extends JavaPlugin implements Listener {
     @EventHandler
     public void onConnect(PlayerJoinEvent event) {
 
-        Player player = (Player) event.getPlayer();
+        Player player = event.getPlayer();
         Location spawn = new Location(Bukkit.getWorld("world"), 0.5, 50.0, 0.5, 0, 0);
         player.teleport(spawn);
 
@@ -199,7 +194,7 @@ public class Main extends JavaPlugin implements Listener {
     @EventHandler
     public void onClick(InventoryClickEvent event) {
 
-        if  (!((event.getCurrentItem().isSimilar(survival_item)) || (event.getCurrentItem().isSimilar(creative_item)) || (event.getCurrentItem().isSimilar(prototype_item)))) {
+        if (!((event.getCurrentItem().isSimilar(survival_item)) || (event.getCurrentItem().isSimilar(creative_item)) || (event.getCurrentItem().isSimilar(prototype_item)))) {
             return;
         }
 
@@ -245,7 +240,6 @@ public class Main extends JavaPlugin implements Listener {
 
         player.sendMessage("A GUI menu was closed & cleared.");
 
-        //Player player = (Player) event.getPlayer();
         PlayerInventory inv = player.getInventory();
         inv.removeItem(survival_item, creative_item, prototype_item);
 
