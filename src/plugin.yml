@@ -1,10 +1,11 @@
-main: me.coopersully.Lobby.Main
+main: me.coopersully.Lobby.HalaraLobbyPlugin
 name: Halara-Lobby
 version: 1.7.4
 author: Curse
 description: Implements mechanics for server-switching and more.
 api-version: 1.17
 prefix: Halara
+depend: [Halara-Core]
 
 commands:
   server-selector:
